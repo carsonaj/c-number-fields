@@ -3,8 +3,6 @@
 #include <inttypes.h>
 #include <math.h>
 #include <assert.h>
-#include "array.h"
-#include "polynomial.h"
 #include "number_field.h"
 
 
@@ -22,14 +20,33 @@ int main() {
     p.coefs[0] = 1.0;
     p.coefs[1] = 2.0;
 
+    Polynomial q = ply_create(1);
+    q.coefs[0] = 2.0;
+    q.coefs[1] = 3.0;
+
+
     NFNumber x;
     x.min_poly = m;
     x.number = p;
+
+    NFNumber y;
+    y.min_poly = m;
+    y.number = q;
 
     printf("x is \n" );
     nf_print(x);
     printf("x inverse is \n" );
     nf_print(nf_inv(x));
+
+    printf("x+y is\n" );
+    nf_print(nf_sum(x,y));
+
+    printf("xy is\n" );
+    nf_print(nf_product(x,y));
+
+    printf("x xinv is \n");
+    nf_print(nf_product(x, nf_inv(x)));
+
 
     //PolyMatrix pair = ply_division(f,g);
     //ply_print(pymat_get_element(pair,0,0));
