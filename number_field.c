@@ -296,6 +296,18 @@ Polynomial ply_create(int deg) {
     return poly;
 }
 
+Polynomial ply_create_array(int deg, double *coefs) {
+    assert(deg >= 0 && deg <= MAX_DEG);
+    Polynomial poly = ply_create(deg);
+    int i;
+    for (i=0; i<=deg; i++) {
+        double coef = coefs[i];
+        ply_set_coef(&poly, i, coef);
+    }
+
+    return poly;
+}
+
 int ply_get_deg(Polynomial poly) {
     int deg = poly.deg;
     return deg;
